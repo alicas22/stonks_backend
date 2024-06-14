@@ -11,11 +11,9 @@ def send_email(to, subject, template):
     )
     mail.send(msg)
 
-
 def send_push_notification(tokens, title, body):
     if not isinstance(tokens, list):
         tokens = [tokens]
-
     message = messaging.MulticastMessage(
         notification=messaging.Notification(
             title=title,
@@ -24,4 +22,4 @@ def send_push_notification(tokens, title, body):
         tokens=tokens,
     )
     response = messaging.send_multicast(message)
-    print('Successfully sent message:', response.success_count)
+    return response.success_count  # Return the count of successful notifications

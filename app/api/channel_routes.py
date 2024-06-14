@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from ..models import db, Profile, Channel, Role
 from ..utils import send_email, send_push_notification
 from flask_socketio import emit
-from app import socketio 
+
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -16,7 +16,7 @@ def livechat(id):
     if not channel:
         return jsonify({"message": "Channel not found"}), 404
     message = data['message']
-    socketio.emit('chat_message', {'message': message, 'channel_id': id}, broadcast=True)
+    # socketio.emit('chat_message', {'message': message, 'channel_id': id}, broadcast=True)
     return jsonify({"message": "Message sent"}), 200
 
 @channel_routes.route('/', methods=['POST'])
